@@ -9,13 +9,13 @@ function getCommentsByIdea(PDO $pdo, int $ideaId): array {
     return $comments;
 }
 
-function addComment(PDO $pdo, string $content, int $ideaId, int $userId) {
+function addComment(PDO $pdo, string $content, int $ideaId, int $userId): void {
     $sql = 'insert into comments (content, ideas_id, users_id) values (:content, :ideaId, :userId)';
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['content' => $content, 'ideaId' => $ideaId, 'userId' => $userId]);
 }
 
-function deleteCommentById(PDO $pdo, int $commentId) {
+function deleteCommentById(PDO $pdo, int $commentId): void {
     $sql = 'delete from comments where id = :commentId';
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['commentId' => $commentId]);
